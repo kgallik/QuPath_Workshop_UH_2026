@@ -12,27 +12,47 @@ There are three main sets of analysis tools built into QuPath:
 
 **Pixel Classifiers** are similar to object classifiers in that the user is teaching the software how to group the pixels in the image by providing examples. Pixel classifiers are great for segmenting complex shapes or structures that may not be easily defined by a single channel or signal in the image data.
 
+Open the LuCa-7color image in QuPath by double clicking on the thumbnail in the Project Tab. You will get a prompt to select the image type if it has not already been assigned. Create a rectangle that is 1024x1024 pixels using `Specify Annotation` (remember to use `Ctrl + L`). The rectangle will be placed in the middle of the viewer. Pick a place that looks interesting to you. Double click the rectangle in the viewer or select it in the Annotation tab to edit or move the rectangle. If the anchor points are visible when an annotation is selected, the object can be moved or edits to the shape can be made.
+
+![rectangle](/Tutorials/PNGs/Create_Rectangle.png)
+
+Try using the wand or brush tool to edit the shape of the rectangle. To add, left click and drag starting inside the rectangle. To remove, hold `Alt + Left Click`. Fill the rectangle in (`Shift + F`) to better see what parts of the shape are included.
+
+![edited rectangle](/Tutorials/PNGs/Edit_Rectangle.png)
+
+Delete the edited shape and add in a new 1024x1024 rectangle. Select the object in the annotation tab, right click and select `Lock`. This prevents an annotation from being accidentally edited or moved. It also allows for adding separate annotations inside.
+
 ## Cell Detection
 
-Open the LuCa-7color image in QuPath by double clicking on the thumbnail in the Project Tab. You will get a prompt to select the image type if it has not already been assigned. Create a rectangle that is 1024x1024 pixels using `Specify Annotation`
+Open `Cell Detection`.
 
-Open Cell Detection (Analyze > Cell detection > Cell detection)
+![Cell Detection menu](/Tutorials/PNGs/Cell_Detection_Menu.png)
 
-<img src="/Tutorials/PNGs/Cell_Detection_Menu.png" width="417" height="161"><br>
+There are options for selecting the channel, pixel size, and preprocessing parameters to optimize detecting cells. Cell expansion creates an arbitrary added boundary to generate a nucleus, cytoplasm, membrane, and cell compartment for measuring image features. This value is set by the user and does not take the context of the image into consideration. If neighboring cells have boundaries that come into contact, they meet in the middle and end. Overlapping objects are not created with this tool.
 
-Adjust the parameters until you are satisfied with the results. Below are the settings I found to work reasonably well.
+Set the threshold value to 3 and keep the rest of the default parameters to get a sense of what the results look like. Then try adjusting each parameter available (smaller and larger values) to see how they impact the end result. Each time the cell detection is run, the previous results will be cleared out (that's okay!). Once you have a better feel for how these parameters affect the cell detection results, try to find an optimized set of parameters you think works well for the data. *Tip: use the show grayscale option in the brightness and contrast menu so it is easier to see the nuclei.*
 
-*Note: this will not be perfect and that's okay!*
+Question: why would the default threshold value of 100 not work for this dataset?
 
-<img src="/Tutorials/PNGs/Cell_Detection_Parameters.png" width="545" height="330"><br>
+![Grayscale DAPI](/Tutorials/PNGs/Grayscale_DAPI.png)
+
+Below are the settings I thought performed well.
+
+![parameters](/Tutorials/PNGs/Cell_Detection_Parameters.png)
 
 ## Object Classifiers
-Using the same objects above, we will create two types of object classifiers to group objects as positive or negative for EGFP. 
 
-**Important! You need measurements in order to classify objects, make sure that `Make measurements` was selected when detecting the nuclei.**
+Using the same objects above, we will create a set of object classifiers to classify cells as positive or negative for FoxP3 and CD8 so we can quantify the number of cells that are single and dual positive for these markers. We will eventually create a composite classifier for identifying the dual positive cells with less bias.
+
+**Important! You need measurements in order to classify objects, make sure that `Make measurements` was selected when detecting the cells. Double click on any cell and look in the annotation tab to verify there are measurements present.**
 
 ### Train an Object Classifier
-Before we train the object classifier, we need to mark some examples of positive and negative cells. Add two Points annotations by clicking the points annotation tool and then clicking `Add` on the popup menu twice. These annotations will be visible under the Annotations tab.
+
+Before we train the object classifier, we need to mark some examples of positive and negative cells for the two markers. We will start with CD8 and then repeat the same process for FoxP3. In the annotations tab, there is a class list for the project. Add two new classes named "CD8+" and "CD8-" by clicking the plus button to the right of `Class List`.
+
+
+
+Using the points tool (`.`) create two sets of points, one 
 
 <img src="/Tutorials/PNGs/Points_Annotations.png" width="372" height="379"><br>
 
