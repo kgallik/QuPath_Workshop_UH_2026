@@ -1,6 +1,12 @@
-# Installing QuPath v6.0 (Personal Computer)
+# Installing QuPath v6.0 (University of Helsinki)
 
-The easiest way to install QuPath is using the installer through QuPath's website:  
+If you are using a university computer, QuPath v6.0 is already installed. Open the start menu and search for QuPath. I recommend opening the console version of QuPath. 
+
+If you would like to install QuPath on a different university device, QuPath is available in the Software Center or you can follow the steps below.
+
+# Installing QuPath (Personal Computer)
+
+The easiest way to install QuPath is using the installer through QuPath's website (note that the latest version is v7.0, older versions can be accessed through the website below):  
 [QuPath Website](https://qupath.github.io/)  
 
 <img src="/Tutorials/PNGs/QuPath_Website.png" width=" 474" height="438"><br>  
@@ -25,6 +31,4 @@ Once you have QuPath installed, test out opening it up. You will be prompted to 
 Uncheck the box in the bottom right (magenta arrow) to disable the welcome window from opening each time you start QuPath.  
 
 One more window will pop up asking if you would like to open the extension manager. Click on "no" for now. If we have time in class, we will go over setting up extensions together.  
-<img src="/Tutorials/PNGs/QuPath_Start_Extensions.png" width="1024" height="568"><br>  
-
-If you want to try getting your extensions folder set up on your own, use the [setup extensions tutorial](/Tutorials/04_Setup_extenstions.md). I recommend selecting a directory you know you can relocate easily in the future.
+<img src="/Tutorials/PNGs/QuPath_Start_Extensions.png" width="1024" height="568"><br> 

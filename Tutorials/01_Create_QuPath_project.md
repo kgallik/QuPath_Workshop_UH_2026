@@ -1,45 +1,43 @@
 # Create a QuPath Project
-1. Create an empty directory (folder) in an easily accessible location on your computer or network. Name the folder something descriptive, like "Practice_QuPath_Project" (use underscores instead of spaces to make it compatible with Linux).
-2. Open QuPath:
-    
-    **Option 1**: Opening QuPath through OnDemand
-    [Link to video walk through](https://vanandelinstitute.sharepoint.com/:v:/s/optical/EfpUD6Mp1U1LpWS3P44X38wBOOi02MNeVR-qQpkoK-a7Cw?e=cy5SNH&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
-    
-    Navigate to VAI's OnDemand site and log in with your VAI account. The OnDemand site link can be found on VAI's SharePoint.
 
-    Using the `hpc desktop`, start a `short` partition for `4 hours` using `16 cores`.
-    
-    <img src="/Tutorials/PNGs/OnDemand_pic.png" width="500" height="200"><br>
+1. Create a new folder on the desktop. Name the folder something descriptive, like "Practice_QuPath_Project" (do not use spaces or special characters in the path of the location, this will cause issues with certain extensions).
 
-    <img src="/Tutorials/PNGs/OnDemand_short_partition_pic.png" width="469" height="375"><br>
-    
-    Once the session starts, set the `compression to 0 (low)` and the `Image Quality to 9 (high)` and launch the virtual desktop.
+2. Open QuPath. The first time you open the software you will get a few pop up windows:
 
-    <img src="/Tutorials/PNGs/OnDemand_desktop_settings_pic.png" width="467" height="205"><br>
+![QuPath Start 1](/Tutorials/PNGs/QuPath_Start.png)
 
-    Open the terminal
+Check `Don't show this again (always agree)` then press `Agree`
 
-    <img src="/Tutorials/PNGs/Terimal_pic.png" width="575" height="387"><br>
+![QuPath Start 2](/Tutorials/PNGs/QuPath_Start2.png)
 
-    Use the following commands, individually, to open QuPath
-    ```
-    module load imaging/QuPath-0.5.1
-    startQuPath
-    ```
-    *Tip: If you forget the command to open the software use `module help imaging/QuPath-0.5.1` to get the command.*
+Uncheck `Show this on startup` to disable this from appearing each time QuPath is started.
 
-    <img src="/Tutorials/PNGs/Terimal_Commands_pic.png" width="410" height="257"><br>
+3. Set up the extension manager. The last popup will ask about setting up the extension manager. Today we will use the default location. Press `Use default`.
 
-    **Option 2**: If you have QuPath installed on your own device, open it as you would any other application.
+![QuPath Extension Manager](/Tutorials/PNGs/QuPath_Start_Extensions_new.png)
 
-    *Tip: A startup dialog will appear the first time you open QuPath, if you do not want it to pop up each time you start the software, select the option to disable it on the window.*
+QuPath will check for updates, a popup window will let you know QuPath v7.0 is available, press the `Okay` button, this will not automatically install anything. You should see the extension manager window, click on `Manage Extension Catalogs`.
 
+![Extension catalog manager](/Tutorials/PNGs/Extension_Manager.png)
 
-3. Drag and drop the empty folder into the open instance of QuPath.
+In the new window, add the following websites to access the catalogs:
+
+- `https://github.com/ksugar/qupath-catalog-ksugar`
+- `https://github.com/BIOP/qupath-biop-catalog`
+
+![Catalog Manager](/Tutorials/PNGs/Catalog_Manager.png)
+
+After adding, close the window and then in the Extension Manger window find the StarDist, SAM, and CellPose extensions, click on their respective plus buttons and install the lastest version (selected by default).
+
+![Extensions to add](/Tutorials/PNGs/Add_Extensions.png)
+
+Restart QuPath so the extensions are read in completely and are ready to use.
+
+4. Drag and drop the empty folder into the open instance of QuPath.
 
     <img src="/Tutorials/PNGs/Creating_Project.png" width="775" height="428"><br>
 
-4. Now you're ready to add in images! Drag and drop images you would like to add to the project into the open QuPath window.
+5. Now you're ready to add in images! Drag and drop images you would like to add to the project into the open QuPath window.
 
      <img src="/Tutorials/PNGs/Adding_Images.png" width="775" height="428"><br>
     
