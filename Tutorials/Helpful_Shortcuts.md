@@ -1,10 +1,11 @@
-# Shortcuts that will save you time
+# Helpful Shortcuts
 
-`Ctrl + L` to open search menu to find built in tools
+`Ctrl + L` to open search menu to find tools
 
 `Crtl + Shift + A` to create a full image rectangle
 
 Tool shortcuts:
+
 - `M` mouse/panning (also holding space bar for temporary panning)
 - `R` rectangle tool
 - `O` oval tool

@@ -4,8 +4,8 @@ Welcome to the workshop for QuPath v6.0! You will find tutorials for this worksh
 
 ## Tutorials
 
-- [Installing QuPath on your own computer](/Tutorials/00_Installing_QuPath.md)
 - [Installing Miniconda](/Tutorials/Installing_MiniConda.md)
+- [Installing QuPath on your own computer](/Tutorials/00_Installing_QuPath.md)
 - [Creating a Project](/Tutorials/01_Create_QuPath_project.md)
 - [Built in Tools (Segmentation and classifiers)](/Tutorials/02_Builtin_Tools.md)
 - [Getting Measurements](/Tutorials/03_Measurments.md)
