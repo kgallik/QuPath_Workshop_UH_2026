@@ -22,6 +22,8 @@ Try using the wand or brush tool to edit the shape of the rectangle. To add, lef
 
 Delete the edited shape and add in a new 1024x1024 rectangle. Select the object in the annotation tab, right click and select `Lock`. This prevents an annotation from being accidentally edited or moved. It also allows for adding separate annotations inside.
 
+*QuPath does not automatically save progress, be sure to save the project after tasks like object creation to prevent loss of time and effort.*
+
 ## Cell Detection
 
 Open `Cell Detection`.
@@ -48,27 +50,27 @@ Using the same objects above, we will create a set of object classifiers to clas
 
 ### Train an Object Classifier
 
-Before we train the object classifier, we need to mark some examples of positive and negative cells for the two markers. We will start with CD8 and then repeat the same process for FoxP3. In the annotations tab, there is a class list for the project. Add two new classes named "CD8+" and "CD8-" by clicking the plus button to the right of `Class List`.
+Before we train the object classifier, we need to mark some examples of positive and negative cells for the two markers. We will start with CD8 and then repeat the same process for FoxP3. In the annotations tab, there is a class list for the project. Add two new classes named "CD8+" and "CD8-" by clicking the plus button to the right of `Class List`. Colors for classes can be changed by clicking on the color square next to the name. Class visibility can be toggled by clicking the eye button.
+
+![classes](/Tutorials/PNGs/Class_List.png)
+
+Using the points tool (`.`) create two sets of points and set the class of one set to `CD8+` and the other to `CD8-`. Add new point sets with `Add` and set the class by right clicking on the object entry.
+
+![classes](/Tutorials/PNGs/Points_Annotations.png)
+
+The name of the annotation can also be changed by right clicking the object in the annotations tab and selecting `Set Properties`. Sometimes changing the names of objects can help with organizing data and keeping track of objects.
+
+Using the brightness and contrast menu, change the channel visibility so only CD8 is on (can turn off all other channels or use the view grayscale option which is my preferred method).
+
+With the points tool active, select the `CD8+` point set and left click on cell detections that are examples of CD8+. Then repeat the process for cells that are CD8- (be sure to select the `CD8-` point set). Try to give examples of the variability of CD8+ cells to help the classifier become more robust to natural biological variability. You should end up with something similar to this:
+
+![Points Example](/Tutorials/PNGs/Points_Example.png)
+
+*Tip: Individual points can be moved by left click and drag, and removed by using  `Alt + Left Click`*
+
+Open `Train Object Classifier`. Change the Feature parameters from `All Measurements` to `Selected Measurements`. Click select and search for CD8 in the new window. Click `Select all` and then click apply. This only selects the results from the search.
 
 
-
-Using the points tool (`.`) create two sets of points, one 
-
-<img src="/Tutorials/PNGs/Points_Annotations.png" width="372" height="379"><br>
-
-Then set the class of one points annotation to Positive and the other to Negative.
-
-<img src="/Tutorials/PNGs/Setting_Class_of_Annotations.png" width="294" height="378"><br>
-
-Using the brightness and contrast menu, turn off the DAPI and AF568 channel so that only the EGFP channel is visible. This will make finding positive and negative examples easier.
-
-Using the Positive and Negative Points Annotations, mark examples of cells positive and negative for EGFP. Aim to have roughly equal numbers of examples.
-
-<img src="/Tutorials/PNGs/PositiveNegative_Examples.png" width="766" height="425"><br>
-
-Open the Object classifier (Classify > Object Classification > Train Object Classifier) and then change the Feature parameters from `All Measurements` to `Selected Measurements`. Click select and search for EGFP in the new window. Select all of the EGFP related measurements and then click apply.
-
-<img src="/Tutorials/PNGs/Object_Classifier_Settings.png" width="406" height="310"><br>
 
 In the Training option, change it from `Unlocked annotations` to `Points only`. 
 
