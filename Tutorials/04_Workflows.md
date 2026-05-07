@@ -20,7 +20,7 @@ Click on the commands to check the parameters. Right click on the commands to re
 
 ![Workflow example](/Tutorials/PNGs/Example_workflow.png)
 
- After finalizing, click on `Create script`. A Script Editor window will open with the commands written in groovy and in the correct order. If you had multiple images of the same type to analyse in the same way, you could run this script for all (or select) images in the QuPath project (Run > Run for project). Create a duplicate of LuCa, delete all of the objects, create a new set of rectangles and try running the script. You will probably get a result like this in the Script Editor:
+ After finalizing, click on `Create script`. A Script Editor window will open with the commands written in groovy and in the correct order. Create a duplicate of LuCa, delete all of the objects, create a new set of rectangles and try running the script. You will probably get a result like this in the Script Editor:
 
 ![Test workflow](/Tutorials/PNGs/Test_Workflow.png)
 
@@ -29,7 +29,7 @@ Why do we have 0 objects? What are we missing from the workflow that we did prev
 <details>
   <summary>What is missing?</summary>
     We need to have selected annotations!
-    Select the rectangles using `Select Annotations`. This will record the command in the Workflow Tab (added to the bottom). Instead of creating a whole new workflow as before, right click on the command and select `Copy Command`. In the script editor, move all the code down a line and paste this command as the first line in the script. Make sure the rectangles are not selected (double click outside of them) and run the script again.
+    Select the rectangles using <code>Select Annotations</code>. This will record the command in the Workflow Tab (added to the bottom). Instead of creating a whole new workflow as before, right click on the command and select `Copy Command`. In the script editor, move all the code down a line and paste this command as the first line in the script. Make sure the rectangles are not selected (double click outside of them) and run the script again.
 </details>
 
 Save the final script. QuPath creates a new folder in the project folder called "scripts" by default. This is a great place to save scripts that are specific for a project. You can easily access project specific scripts from `Project scripts` in the `Automate` menu. If you know the name of the script, you can also search for it using `Ctrl + L`.
