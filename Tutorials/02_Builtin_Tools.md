@@ -70,8 +70,6 @@ With the points tool active, select the `CD8+` point set and left click on cell 
 
 Open `Train Object Classifier`. Change the Feature parameters from `All Measurements` to `Selected Measurements`. Click select and search for CD8 in the new window. Click `Select all` and then click apply. This only selects the results from the search.
 
-
-
 In the Training option, change it from `Unlocked annotations` to `Points only`. 
 
 *Note: if you were using training data across multiple images, or a specific training image, then you would select Load training and specify which images to use for training the object classifier. In this case, **only the examples of classes from the selected images would be used**.*
