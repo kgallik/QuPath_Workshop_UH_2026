@@ -52,3 +52,30 @@ Thread.sleep(100)
 ```
 
 Congratulations on creating your first batch analysis script! Don't forget to save it!
+
+## Training Images - Critical for analysing many images the same way
+
+So far, we have used the same image to train classifiers and set thresholds. But what if you had dozens or hundreds of images to analyse? To get the most statistical power from an imaging dataset all the steps from sample prep to analysis must be as consistent/identical as possible. This is where training images are incredibly helpful to find parameters that work generally well across datasets.
+
+We are going to pretend that we have many images from a dataset.
+
+- Create three copies of the LuCa image without duplicating the data
+- Add in a new class called "Training"
+- In each duplicated image, create two 500x500 px rectangles using `Specify Annotation` and set the class to `Training` so when the rectangle is added to the image, it is already classified
+  - Try to place the rectangles in different locations in each image
+
+![Training ROIs](/Tutorials/PNGs/Training_ROI.png)
+
+Make sure the project is saved after adding in all the training rectangles. Open `Create training image` and select `Training` from the class drop down menu:
+
+![Create training image](/Tutorials/PNGs/Create_Training_Image.png)
+
+I set the preferred image width to 1000 px so that I get an image that is 2 x 3 rectangles in size (because each rectangle is 500 px wide). Click okay and a new image will be added to the project. If a large number of training regions are used, this can take some time to generate.
+
+*Tip: Creating the same sized ROIs (regions of interest) and the same number helps with more evenly distributed representation of the data. Additionally, knowing the number and size of all the ROIs allows you to make a tidy training image. If the training image contains added black background regions, it can cause errors with some tools.*
+
+You should see something similar after creating the training image (you will first get a prompt window asking to set the image type):
+
+![Training image](/Tutorials/PNGs/Training_Image.png)
+
+Try using the training image to create cell detections and train a new composite classifier. Then create another duplicate of LuCa and use a script to create cell detections and classify them with the new classifier.

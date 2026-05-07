@@ -18,7 +18,7 @@ The location of the model also needs to be provided in the variable `modelPath`.
 
 Example of a model path = `'/path/to/location/dsb2018_paper.pb'`
 
-*Tip: Groovy (QuPath's scripting language) and Python (what StarDist runs on) do not like backslashes, common in Windows OS. Use `$/\Windows\style\path\file/$` in Groovy to avoid issues.*
+*Tip: Groovy (QuPath's scripting language) and Python (what StarDist runs on) do not like backslashes, common in Windows OS. Use* `$/\Windows\style\path\file/$` *in Groovy to avoid issues.*
 
 ### Fluorescence model
 
@@ -32,20 +32,21 @@ Enter the path to the dsb2018 heavy augment model in the script on line 21 where
 
  `\\ad.helsinki.fi\home\g\**your_username**\Desktop\StarDistModels\dsb2018_heavy_augment.pb`
 
-*Tip: you can get the path to a file by right clicking and selecting "copy as path" in Windows OS.*
+*Tip: you can get the path to a file by right clicking and selecting "copy as path" in Windows OS. Remember to add* `$/` *before and* `/$` *after the path.*
 
 Adjust the below parameters to the following:
 
 - Channel: `6` (using the index of the channel is safer than the name)
-- Cell expansion: `4`
+- Cell expansion: `4` to replicate the same expansion we used earlier
 
-Select one of the rectangles (should be highlighted) and then press `Run` to run StarDist. It should take approximately 1 min to run on the Short Partition.
+Select one of the rectangles (should be highlighted) and then press `Run` to run StarDist. It should only take a few minutes at most because it is a small area.
 
 Try changing some of the parameters to see how they influence the results.
 
-*Tip: If you are using a script to batch analyze your data, find the parameters that generally work well on your data and then save the script in the QuPath project for documentation and future use.*
+*Tip: If you are using a script to batch analyse your data, find the parameters that generally work well on your data and then save the script in the QuPath project for documentation and future use.*
 
 ### H&E model
+
 Open 44770.svs to test out the H&E model. Create a 2048X2048 rectangle and place it somewhere interesting. Then open `StarDist H&E nucleus detection script`. Like with using `StarDist fluorescence cell detection script`, you will need to add in the path to the `he_heavy_augment.pb` model. Because this model was trained on RGB images of H&E stained samples, you do not need to specify a channel. You can still adjust the `normalizePercentiles`, `threshold`, and `pixelSize` parameters to fine tune the results. 
 
 Use `0.345` for the `pixelSize` and run the script.
