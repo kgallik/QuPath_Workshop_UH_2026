@@ -12,7 +12,7 @@ Open the Software Center on your workstation (computer) and search for "minicond
 
 Click on the miniconda icon and then click "Install". Be sure to install **Miniconda** and not Anaconda3. The install should be quick.
 
-Once the Software Center shows that the software is installed, we will open an anconda prompt. Open the Windows Start Menu and search for "anaconda". You should see an option to launch an anaconda prompt:
+Once the Software Center shows that the software is installed, we will open an anaconda prompt. Open the Windows Start Menu and search for "anaconda". You should see an option to launch an anaconda prompt:
 
 ![Anaconda prompt start menu](/Tutorials/PNGs/Anaconda_Prompt_StartMenu.png)
 
@@ -70,20 +70,20 @@ Create a new python environment with:
 
 Follow the prompts like before to install the required base packages.
 
-Activate the evironment:
+Activate the environment:
 
 `conda activate SAMAPI`
 
-Install the samapi requirements with this command:
+Install the SAMAPI requirements with this command:
 
 `pip install git+https://github.com/ksugar/samapi.git`
 
-After installing completes, start the samapi server with the following command so the model files are downloaded and ready to use later:
+After installing completes, start the SAMAPI server with the following command so the model files are downloaded and ready to use later:
 
 `uvicorn samapi.main:app --workers 2`
 
 The server will show these statuses when it is running (sam3 is gated and cannot be accessed, the warning is normal and does not affect the function of the tool):
 
-![sam server running](/Tutorials/PNGs/SAMserverstart.png)
+![SAM server running](/Tutorials/PNGs/SAMserverstart.png)
 
 Use `Crtl + C` to exit out of the server. We will relaunch it later in the class.
