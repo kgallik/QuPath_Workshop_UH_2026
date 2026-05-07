@@ -125,44 +125,51 @@ Like in [Training an Object Classifier](#train-an-object-classifier), you can sa
 Try making a single measurement classifier for FoxP3 and then create a new composite classifier using the single channel classifiers. Apply the classifier and compare the results to the trained object classifier.
 
 ## Pixel Classifiers
-Training pixel classifiers is similar to training object classifiers, but use different annotations to mark examples. In this example, we are going to make a pixel classifier to automatically segment whole glomeruli.
+
+Training pixel classifiers is similar to training object classifiers, but use different annotations to mark examples. The type of pixel classifiers that can be trained in QuPath are also examples of machine learning that uses pre-extracted features for learning.
+
+Create another duplicate of the LuCa image. Open the image and then delete all of the objects with `Delete All Objects`. Create a new class called 'PDL1'. Our goal is to segment the regions that are PDL1 positive.
 
 ### Train the Pixel Classifier
-First, create a new class and name it `glomerulus`. You can change the color of any class by double clicking the name and selecting a new color.
 
-<img src="/Tutorials/PNGs/Add_Class.png" width="338" height="367"><br>
+Using the Open Polygon annotation tool, start marking examples of the PDL1 staining. Click on the PDL1 class and then click `Auto set` at the bottom of the list of classes. While this option is enabled, all annotations created will be assigned whichever class is selected. Leave some unmarked so we can assess how the classifier is performing. Give attention to the edge of the signal so the classifier learns the boundary. Change the class to `Ignore*` and mark examples of background and autofluorescence that would not be considered true PDL1 staining. Pair some examples of PDL1 and Ignore. You should have something similar to this:
 
-Using the Open Polygon annotation tool, start marking examples of a couple glomeruli. Leave some unmarked so we can assess how the classifier is performing. Give attention to the edge of the objects so the classifier learns the boundary of the objects. In the Annotation menu, Ctrl+Click all annotations that are on glomeruli and then set their class to `glomerulus`.
+![Pixel Classifier annotations](/Tutorials/PNGs/Pixel_Classifier_training.png)
 
-*Tip: Instead of creating unclassified annotations, and then classifying them, highlight the class you are going to mark and then click Auto Set. All subsequent annotations will automatically be assigned that class. Just remember to change the class as you are marking different examples.*
-
-<img src="/Tutorials/PNGs/Adding_Annotations.png" width="1273" height="738"><br>
-
-After marking some glomeruli, add in some examples of what is not a glomeruli. These will be classified as `Ignore*`.
-
-<img src="/Tutorials/PNGs/Adding_Annotations2.png" width="1155" height="666"><br>
-
-Open Train Pixel Classifier (Classify > Pixel Classification > Train Pixel Classifier) and adjust the parameters to the following:
+Open `Train pixel classifier` and adjust the parameters to the following:
 
 - Classifier: RTrees
 - Resolution: High (1.38 um/pixel)
 - Features:
-  - Channels: DAPI, EGFP, AF568
+  - Channels: PDL1
   - Scales: 1.0, 2.0, 4.0, 8.0
   - Features: Select All
-  - Local Normalization: Mean and Variance 
+  - Local Normalization: Mean and Variance
   - Local Normalization scale: 8
 - Output: Classification
 - Region: Everywhere
-  
-<img src="/Tutorials/PNGs/Pixel_classifier_parameters.png" width="615" height="375"><br>
 
-Preview the results with Live Prediction and add in open polygon annotations for the `glomerulus` and `Ignore*` classes until the preview of the results seem reasonable. Below example has the annotations hidden for easier visibility.
+Click `Live Prediction` to preview the results, you should see something similar to this:
 
-<img src="/Tutorials/PNGs/Pixel_classifier_preview.png" width="480" height="755"><br>
+![Pixel classifier preview](/Tutorials/PNGs/Pixel_Classifier_preview.png)
+
+You can use the slider next to the `C` button to adjust the transparency of the overlay.
+
+In the pixel classifier window, there is a mini viewer with a dropdown menu below. This drop down menu allows you to preview the features that are used for the training. Take some time to look through some of the features.
+
+![Features](/Tutorials/PNGs/Pixel_Classifier_features.png)
+
+*Tip: the mini viewer is not very important, but the dropdown menu below is helpful. The feature selected will also be visible as an overlay in the main viewer and the opacity can also be adjusted.*
+
+Add examples of `PDL1` and `Ignore*` as needed until you are satisfied with the results. You can also test out removing/adding features, adjusting the resolution and scales used, and the type of normalization used.
+
+Save the pixel classifier when you are satisfied with the results.
 
 ### Make Objects From the Pixel Classifier
-Name and save the classifier to use later. 
+
+Create a duplicate of the LuCa image, open it, and delete all of the annotations. Create a full image annotation (`Ctrl + Shift + A`). Open `Load pixel classifier`, select `Any annotation ROI` from the region drop down first and then select the pixel classifier we just trained (This order allows you to select where to apply the classifier without having to wait for the classifier to load in first). *Tip: turn off the overlay `C` before loading in the classifier to improve performance*
+
+![Load classifier](/Tutorials/PNGs/Load_pixel_classifier.png)
 
 Create objects from the pixel classifier (may need to be a trial and error process to find the minimum size for excluding false-positives). Select Annotations as the object type if you would like to add cell detections within the glomeruli. Select Detections for a lightweight option and if you don't plan to detect cells inside the glomeruli.
 
