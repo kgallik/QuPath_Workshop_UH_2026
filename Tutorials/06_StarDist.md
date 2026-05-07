@@ -1,4 +1,5 @@
 # Using StarDist in QuPath
+
 [StarDist](https://github.com/stardist), created by Uwe Schmidt and Martin Weigert, is a deep learning convolution neural net that excels at detecting round blob objects, like nuclei. It is also excellent at detecting these types of shapes when they are highly clustered.
 
 Two primary models have been created and released by Schmidt and Weigert, and are available to use with QuPath's StarDist extension: dsb2018_paper(_heavy_augment) for fluorescence data and he_heavy_augment for H&E stained tissues. 

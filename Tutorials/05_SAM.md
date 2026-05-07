@@ -20,7 +20,6 @@ When you see these messages in the terminal window, SAM is ready to use:
 
 In QuPath, open the CMU-1 image. Open the `SAM` extension in QuPath.
 
-
 Select the Rectangle Annotation button in the window and then click Live Mode. Draw a rectangle that roughly covers the full kidney, SAM will automatically create a segmentation outline that outlines the full kidney.
 
 <img src='/Tutorials/PNGs/SAM_Outline.png' width='372' height='239'><br>
