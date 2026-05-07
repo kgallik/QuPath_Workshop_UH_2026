@@ -30,7 +30,7 @@ Open `Cell Detection`.
 
 ![Cell Detection menu](/Tutorials/PNGs/Cell_Detection_Menu.png)
 
-There are options for selecting the channel, pixel size, and preprocessing parameters to optimize detecting cells. Cell expansion creates an arbitrary added boundary to generate a nucleus, cytoplasm, membrane, and cell compartment for measuring image features. This value is set by the user and does not take the context of the image into consideration. If neighboring cells have boundaries that come into contact, they meet in the middle and end. Overlapping objects are not created with this tool.
+There are options for selecting the channel, pixel size, and pre-processing parameters to optimize detecting cells. Cell expansion creates an arbitrary added boundary to generate a nucleus, cytoplasm, membrane, and cell compartment for measuring image features. This value is set by the user and does not take the context of the image into consideration. If neighbouring cells have boundaries that come into contact, they meet in the middle and end. Overlapping objects are not created with this tool.
 
 Set the threshold value to 3 and keep the rest of the default parameters to get a sense of what the results look like. Then try adjusting each parameter available (smaller and larger values) to see how they impact the end result. Each time the cell detection is run, the previous results will be cleared out (that's okay!). Once you have a better feel for how these parameters affect the cell detection results, try to find an optimized set of parameters you think works well for the data. *Tip: use the show grayscale option in the brightness and contrast menu so it is easier to see the nuclei.*
 
@@ -50,7 +50,9 @@ Using the same objects above, we will create a set of object classifiers to clas
 
 ### Train an Object Classifier
 
-Before we train the object classifier, we need to mark some examples of positive and negative cells for the two markers. We will start with CD8 and then repeat the same process for FoxP3. In the annotations tab, there is a class list for the project. Add two new classes named "CD8+" and "CD8-" by clicking the plus button to the right of `Class List`. Colors for classes can be changed by clicking on the color square next to the name. Class visibility can be toggled by clicking the eye button.
+This tool is an example of machine learning, which uses pre-extracted features (i.e., the measurements made when creating cell detections) and statistics to calculate the combination of features to separate the classes.
+
+Before we train the object classifier, we need to mark some examples of positive and negative cells for the two markers. We will start with CD8 and then repeat the same process for FoxP3. In the annotations tab, there is a class list for the project. Add two new classes named "CD8+" and "CD8-" by clicking the plus button to the right of `Class List`. Colours for classes can be changed by clicking on the colour square next to the name. Class visibility can be toggled by clicking the eye button.
 
 ![classes](/Tutorials/PNGs/Class_List.png)
 
@@ -110,11 +112,17 @@ Try creating a new rectangle in the same image and create a new set of cells usi
 
 Another approach to classifying cells is to use a hard coded threshold using a single measurement. This is less flexible to natural variation that may be seen across your data, but a great option for small and highly consistent datasets or single images. Do not set different threshold values for different images/data you plan to compare, instead [train a classifier like in the section above](#train-an-object-classifier).
 
-Open the Single Measurement Classifier (Classify > Object classification > Create single measurement classifier). Change the Channel filter to EGFP, and set Above Threshold to Positive and Below Threshold to Negative. Then click on Live Preview. QuPath's default option is the mean intensity value of either the nucleus compartment or the cell and will make a good guess where the threshold should be. In this case, the suggested threshold does a reasonable job separating the positive and negative cells. Test out other measurement options or threshold values to get a feel for how this tool works.
+Duplicate the LuCa image by right clicking on the image entry in the Project Tab and selecting `Duplicate Image`. Rename or add a suffix to the image and keep the option to duplicate the image data (this maintains the cells we have already created).
 
-<img src="/Tutorials/PNGs/Single_Measurement_Classifier.png" width="630" height="418"><br>
+![Duplicate Image](/Tutorials/PNGs/Duplicate_Image.png)
+
+Open the duplicated image and then open `Single Measurement Classifier`. Change the Channel filter to CD8, and the measurement to `CD8:Nucleus:Mean`. Set `Above Threshold` to `CD8+` and `Below Threshold` to `CD8-`. Then click on `Live Preview`. QuPath will make a good guess where the threshold should be based on the distribution of the values. Review the results and test out other measurements/threshold values to get a feel for how this tool works.
+
+![Single Measurement Classifier](/Tutorials/PNGs/Single_Measurement_Classifier.png)
 
 Like in [Training an Object Classifier](#train-an-object-classifier), you can save the single measurement classifier to use on other images.
+
+Try making a single measurement classifier for FoxP3 and then create a new composite classifier using the single channel classifiers. Apply the classifier and compare the results to the trained object classifier.
 
 ## Pixel Classifiers
 Training pixel classifiers is similar to training object classifiers, but use different annotations to mark examples. In this example, we are going to make a pixel classifier to automatically segment whole glomeruli.
