@@ -163,18 +163,38 @@ In the pixel classifier window, there is a mini viewer with a dropdown menu belo
 
 Add examples of `PDL1` and `Ignore*` as needed until you are satisfied with the results. You can also test out removing/adding features, adjusting the resolution and scales used, and the type of normalization used.
 
-Save the pixel classifier when you are satisfied with the results.
+Save the pixel classifier when you are satisfied with the results and close the window.
 
-### Make Objects From the Pixel Classifier
+### Measurements from Pixel Classifiers
 
-Create a duplicate of the LuCa image, open it, and delete all of the annotations. Create a full image annotation (`Ctrl + Shift + A`). Open `Load pixel classifier`, select `Any annotation ROI` from the region drop down first and then select the pixel classifier we just trained (This order allows you to select where to apply the classifier without having to wait for the classifier to load in first). *Tip: turn off the overlay `C` before loading in the classifier to improve performance*
+Open `Load pixel classifier`, select `Any annotation ROI` from the region drop down first and then select the pixel classifier we just trained (This order allows you to select where to apply the classifier without having to wait for the classifier to load in first). *Tip: turn off the overlay `C` before loading in the classifier to improve performance*
 
 ![Load classifier](/Tutorials/PNGs/Load_pixel_classifier.png)
 
-Create objects from the pixel classifier (may need to be a trial and error process to find the minimum size for excluding false-positives). Select Annotations as the object type if you would like to add cell detections within the glomeruli. Select Detections for a lightweight option and if you don't plan to detect cells inside the glomeruli.
+After loading the classifier, click `Add Measurements`, you should now see a new measurement added to the full image annotation created earlier. Be sure to click on the annotation in the annotation list to view the measurements.
 
-These parameters worked well for this data and the pixel classifier I generated:
+![Area measurement](/Tutorials/PNGs/PDL1_classifier_measurement.png)
 
-<img src="/Tutorials/PNGs/Pixel_classifier_create_objects2.png" width="543" height="399"><br>
+### Make Objects From the Pixel Classifier
 
-*Tip: The Split Objects option can be used if you want to know information about each individual object detected. If you are only interested in the class as a whole, then this option does not have to be used and will be less computationally intense. Be careful of the Delete Existing Objects Option as it will remove everything, use with caution.*
+#### Annotations
+
+Create a duplicate of the LuCa image, open it, and delete all of the annotations. Create a full image annotation (`Ctrl + Shift + A`). Open `Load pixel classifier`, select `Any annotation ROI` from the region drop down first and then select the pixel classifier we just trained (This order allows you to select where to apply the classifier without having to wait for the classifier to load in first). *Tip: turn off the overlay `C` before loading in the classifier to improve performance*
+
+We are going to create outlines (Annotations) of the PDL1 signal using the pixel classifier. Click `Create objects` and select Annotation objects as the parent objects in the next pop up window. In the next pop up window, there are several parameters that can be adjusted to finetune the objects that are generated. Either annotations or detections can be generated, today we will create annotations. Test out different values in the Minimum object size and Minimum hole size parameters (Objects and holes will be much larger than you might expect!). *Tip: turn off the pixel classifier overlay so it is easier to see the created objects*
+
+![Create objects](/Tutorials/PNGs/Create_Annotations_pixelclassifier.png)
+
+The default value of 0 for the object and hole size will keep all the pixels that are identified by the pixel classifier. Use `Split Objects` if you would like non-continuous regions of pixels to be different objects, use `Delete existing objects` if you want to remove the previously made objects, can be helpful when testing out different size parameters but be careful ***this will delete all the objects present***.
+
+#### Detections
+
+To create detections instead of annotations, select detections from the Object Type drop down. The same rules above for creating objects apply here. Try creating detections to compare how they are listed in the Annotation tab.
+
+#### Using Pixel Classifier Objects for Downstream Analysis (Reference only)
+
+Objects created from pixel classifiers can be used in different ways to layer and target additional analyses. Some examples include:
+
+- Classify detections created with a different classifier (could be an object or pixel classifier)
+- If Annotations are created, detections could be generated within them to answer questions like "how many cells are in the PDL1 regions?"
+  - These detections could also be classified to answer a more specific question like "what proportion of cells in the PDL1 regions are positive for X?"
