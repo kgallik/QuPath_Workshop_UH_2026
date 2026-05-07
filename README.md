@@ -5,15 +5,16 @@ Welcome to the workshop for QuPath v6.0! You will find tutorials for this worksh
 ## Tutorials
 
 - [Installing Miniconda](/Tutorials/Installing_MiniConda.md)
-- [Installing QuPath on your own computer](/Tutorials/00_Installing_QuPath.md)
+- [Installing QuPath and the first start up](/Tutorials/00_Installing_QuPath.md)
 - [Creating a Project](/Tutorials/01_Create_QuPath_project.md)
 - [Built in Tools (Segmentation and classifiers)](/Tutorials/02_Builtin_Tools.md)
 - [Getting Measurements](/Tutorials/03_Measurments.md)
-- [Setup Extensions](/Tutorials/04_Setup_extenstions.md)
-- [Segment Anything Model (SAM)](/Tutorials/05_SAM.md)
-- [StarDist](/Tutorials/06_StarDist.md)
-- [CellPose](/Tutorials/07_CellPose.md)
-- [Making a reusable workflow](/Tutorials/08_Workflows.md)
+- [Making a reusable workflow](/Tutorials/04_Workflows.md)
+- [StarDist](/Tutorials/05_StarDist.md)
+- [CellPose](/Tutorials/06_CellPose.md)
+- [Segment Anything Model (SAM)](/Tutorials/07_SAM.md)
+
+
 
 ## Images
 
