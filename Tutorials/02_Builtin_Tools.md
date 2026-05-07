@@ -62,7 +62,7 @@ The name of the annotation can also be changed by right clicking the object in t
 
 Using the brightness and contrast menu, change the channel visibility so only CD8 is on (can turn off all other channels or use the view grayscale option which is my preferred method).
 
-With the points tool active, select the `CD8+` point set and left click on cell detections that are examples of CD8+. Then repeat the process for cells that are CD8- (be sure to select the `CD8-` point set). Try to give examples of the variability of CD8+ cells to help the classifier become more robust to natural biological variability. You should end up with something similar to this:
+With the points tool active, select the `CD8+` point set and left click on cell detections that are examples of CD8+. Then repeat the process for cells that are CD8- (be sure to select the `CD8-` point set). Try to give examples of the variability of CD8+ cells to help the classifier become more robust to natural biological variability. Do not mark all the cells as positive or negative, for this dataset start with up to 10 cells for each class. You should end up with something similar to this:
 
 ![Points Example](/Tutorials/PNGs/Points_Example.png)
 
@@ -70,17 +70,44 @@ With the points tool active, select the `CD8+` point set and left click on cell 
 
 Open `Train Object Classifier`. Change the Feature parameters from `All Measurements` to `Selected Measurements`. Click select and search for CD8 in the new window. Click `Select all` and then click apply. This only selects the results from the search.
 
-In the Training option, change it from `Unlocked annotations` to `Points only`. 
+![Classifier settings](/Tutorials/PNGs/Object_Classifier_Settings.png)
+
+In the Training drop down, change it from `Unlocked annotations` to `Points only`. If you have several sets of classes present on the image, change the Classes from `All Classes` to `Selected Classes`, click select, and select only the classes you want to use in training (important later on). Additionally, click on `Load Training` and select the images to use for training. In our case, we are only using the LuCa image, but in real experiments, you may be using several images. Finally, in `Advanced Options` select `Mean & Variance`, normalizing can help with generalizing the classifier.
+
+![Select Training Image](/Tutorials/PNGs/Training_Image_Selection.png)
 
 *Note: if you were using training data across multiple images, or a specific training image, then you would select Load training and specify which images to use for training the object classifier. In this case, **only the examples of classes from the selected images would be used**.*
 
-Once the examples are annotated and the object classifier parameters are set, click on the Live update button to preview. You can also name and save the classier for use on other images.
+Once the examples are annotated and the object classifier parameters are set, click on the Live update button to preview. You can also name and save the classier for use on other images. Once you are satisfied with the results, save the classifier.
 
-<img src="/Tutorials/PNGs/Preview_Classifier.png" width="618" height="349"><br>
+![Classifier preview](/Tutorials/PNGs/Classifier_Preview.png)
 
-The benefit of training an object classifier with a machine learning algorithm is that it is more flexible to natural variation that can be seen across samples and batches because it uses multiple sets of measurements to make decisions on how a detection should be classified.
+The pie chart shows the proportion of training annotations for each class, this can be very helpful when checking for class imbalance (can impact the results significantly).
+
+The benefit of training an object classifier with a machine learning algorithm is that it can be more robust to natural variation seen in biological data. Additionally, any bias/error introduced into the training remains fairly consistent across the data it is applied to. However, careful and well planned training strategies are required for best results.
+
+After creating the CD8 classifier, create a new object classifier for FoxP3. Reset the object classes with `Reset detection classification` to make training and previewing results easier. Add two new sets of points, and when setting up the new object classifier, be sure to only select the measurements for the FoxP3 channel and to only use the FoxP3+ and FoxP3- classes. Save the classifier after you are happy with the performance and reset the detection classes again.
+
+### Creating a composite classifier for multiclass classification
+
+To assign multiple classes to objects (i.e., FoxP3+;CD8-, FoxP3+;CD8+, FoxP3-;CD8-, FoxP3-;CD8+), we will use QuPath's `Create composite classifier` to merge the two classifiers we created. Open `Create composite classifier`, select the two classifiers, name the new composite classifier and click `Save & Apply`. You should see something similar to this:
+
+![Composite Classifier Results](/Tutorials/PNGs/Composite_Classifier_Results.png)
+
+In the Class list in the Annotation tab, the new combined classes will not be visible yet. To add these new classes, click on the arrow to the right of Class List and in the populate from existing objects menu, select `All Classes (including sub-classes)`. You can choose if you want to clear out any classes not present.
+
+![Add Classes](/Tutorials/PNGs/Class_Visibility.png)
+
+You should see the new classes added to the class list:
+
+![New Classes Added](/Tutorials/PNGs/New_Classes_Added.png)
+
+Take some time to toggle the visibility of the different classes, were you able to find any dual positive cells?
+
+Try creating a new rectangle in the same image and create a new set of cells using the same cell detection settings from before. Then apply the new composite classifier to these cells (`Load Object Classifier` and then select the composite classifier). Do the results seem reliable to you?
 
 ## Creating a Single Measurement Classifier
+
 Another approach to classifying cells is to use a hard coded threshold using a single measurement. This is less flexible to natural variation that may be seen across your data, but a great option for small and highly consistent datasets or single images. Do not set different threshold values for different images/data you plan to compare, instead [train a classifier like in the section above](#train-an-object-classifier).
 
 Open the Single Measurement Classifier (Classify > Object classification > Create single measurement classifier). Change the Channel filter to EGFP, and set Above Threshold to Positive and Below Threshold to Negative. Then click on Live Preview. QuPath's default option is the mean intensity value of either the nucleus compartment or the cell and will make a good guess where the threshold should be. In this case, the suggested threshold does a reasonable job separating the positive and negative cells. Test out other measurement options or threshold values to get a feel for how this tool works.
