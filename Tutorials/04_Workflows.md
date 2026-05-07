@@ -78,4 +78,4 @@ You should see something similar after creating the training image (you will fir
 
 ![Training image](/Tutorials/PNGs/Training_Image.png)
 
-Try using the training image to create cell detections and train a new composite classifier. Then create another duplicate of LuCa and use a script to create cell detections and classify them with the new classifier.
+Try using the training image to create cell detections in the entire image and train a new composite classifier. Then create another duplicate of LuCa and use a script to create cell detections and classify them with the new classifier.
