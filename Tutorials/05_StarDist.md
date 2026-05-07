@@ -43,8 +43,6 @@ Select the full image annotation (should be highlighted) and click `Run` in the 
 
 Try changing some of the parameters to see how they influence the results. Can you find a set of parameters that reliably segments the clumped and isolated nuclei? How do these results compare to the cell segmentation from QuPath's built in tool?
 
-*Tip: If you are using a script to batch analyse your data, find the parameters that generally work well on your data and then save the script in the QuPath project for documentation and future use.*
-
 #### Combining StarDist with QuPath classifier tools (reference only)
 
 Like with the cell detections we made previously, an object classifier can be trained with these detections. The command to classify the detections can be added to the bottom of the script so that after detections are made by StarDist, they are classified. An example script is in the [Example Script folder](/Tutorials/Example_Scripts/) for reference.
@@ -57,7 +55,7 @@ You should get something similar to this with the default parameters:
 
 ![StarDist Results H&E](/Tutorials/PNGs/StarDist_HE.png)
 
-Try out different parameters to see how they influence the results. Can you find parameters that keep real nuclei while excluding false detections? If we were unable to get ideal segmentation results, what are some tools we have covered previously that could be used to identify nuclei to keep and nuclei to remove?
+Try out different parameters to see how they influence the results. Can you find parameters that keep real nuclei while excluding false detections? If we were unable to get ideal segmentation results, what are some tools we have covered previously that could be used to identify detections to keep and detections to remove?
 
 See an [example script here](/Tutorials/Example_Scripts/HE_StarDist_Filter_Nuclei.groovy) that uses a trained classifier to identify and then remove the false nuclei detections.
 
