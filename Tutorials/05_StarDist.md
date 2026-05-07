@@ -22,7 +22,7 @@ Example of a model path = `'/path/to/location/dsb2018_paper.pb'`
 
 ### Fluorescence model
 
-Create a duplicate of the LuCa image that contains the original cell detections created earlier. Delete the points annotations, if present, and the detections (`Delete all detections`) so the original rectangles remain.
+Create a duplicate of the training image. Delete the points annotations, if present, and the detections (`Delete all detections`) so only the rectangle remains.
 
 Open `StarDist fluorescence detection script`:
 
@@ -39,29 +39,38 @@ Adjust the below parameters to the following:
 - Channel: `6` (using the index of the channel is safer than the name)
 - Cell expansion: `4` to replicate the same expansion we used earlier
 
-Select one of the rectangles (should be highlighted) and then press `Run` to run StarDist. It should only take a few minutes at most because it is a small area.
+Select the full image annotation (should be highlighted) and click `Run` in the script editor to run StarDist. It should only take a few minutes.
 
-Try changing some of the parameters to see how they influence the results.
+Try changing some of the parameters to see how they influence the results. Can you find a set of parameters that reliably segments the clumped and isolated nuclei? How do these results compare to the cell segmentation from QuPath's built in tool?
 
 *Tip: If you are using a script to batch analyse your data, find the parameters that generally work well on your data and then save the script in the QuPath project for documentation and future use.*
 
+#### Combining StarDist with QuPath classifier tools (reference only)
+
+Like with the cell detections we made previously, an object classifier can be trained with these detections. The command to classify the detections can be added to the bottom of the script so that after detections are made by StarDist, they are classified. An example script is in the [Example Script folder](/Tutorials/Example_Scripts/) for reference.
+
 ### H&E model
 
-Open 44770.svs to test out the H&E model. Create a 2048X2048 rectangle and place it somewhere interesting. Then open `StarDist H&E nucleus detection script`. Like with using `StarDist fluorescence cell detection script`, you will need to add in the path to the `he_heavy_augment.pb` model. Because this model was trained on RGB images of H&E stained samples, you do not need to specify a channel. You can still adjust the `normalizePercentiles`, `threshold`, and `pixelSize` parameters to fine tune the results. 
+Open CMU-1 to test out the H&E model. Create a 1024x1024 rectangle and place it somewhere interesting. oi87Then open `StarDist H&E nucleus detection script`. Like with using `StarDist fluorescence cell detection script`, you will need to add in the path to the `he_heavy_augment.pb` model. Because this model was trained on RGB images of H&E stained samples, you do not need to specify a channel. You can still adjust the `normalizePercentiles`, `threshold`, and `pixelSize` parameters to fine tune the results.
 
-Use `0.345` for the `pixelSize` and run the script.
+You should get something similar to this with the default parameters:
 
-![StarDist Results H&E](/Tutorials/PNGs/StarDist_Results2.png)
+![StarDist Results H&E](/Tutorials/PNGs/StarDist_HE.png)
 
-Try out different parameters to see how they influence the results.
+Try out different parameters to see how they influence the results. Can you find parameters that keep real nuclei while excluding false detections? If we were unable to get ideal segmentation results, what are some tools we have covered previously that could be used to identify nuclei to keep and nuclei to remove?
+
+See an [example script here](/Tutorials/Example_Scripts/HE_StarDist_Filter_Nuclei.groovy) that uses a trained classifier to identify and then remove the false nuclei detections.
 
 ### Common Errors
-```
+
+```txt
 ERROR: No parent objects are selected!
 ```
-This means that the annotation is not selected, double click on the annotation in the image or select it in the Annotation tab and run the script again.
 
-```
+This means that the annotation is not selected or there are no annotations present on the image depending on if `def pathObjects = QP.getSelectedObjects()` or `def pathObjects = QP.getAnnotationObjects()` is used.
+
+```text
 ERROR: I couldn't find the model file /typo/or/wrong/path/heheavy_augment.pb in QuPathScript at line number 25
 ```
-Check the path or the slash type used. Groovy (the scripting language for QuPath) does not recognize `\` for paths, use either `\\` or `/`
+
+Check the path or the slash type used. If Windows OS is used, remember to add `$/` before and `/$` after the path.
