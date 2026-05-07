@@ -1,9 +1,12 @@
-# Workflows and batch analysis in QuPath
+# Workflows and Batch Analysis in QuPath
+
 One of the best features of QuPath is that you can interactively create and fine tune an analysis pipeline without risk of losing track of the perfect parameters (with some exceptions). In this tutorial, we will build out a reusable workflow to run on a small batch of images.
 
-## The workflow tab
-Most of the built in functions in QuPath are recorded in the order they occurred and with the parameters used under the workflow tab. Extensions are not recorded in the workflow tab, but can be integrated with the script generated using Create Workflow.
+## The Workflow Tab
 
+Many of the built in functions in QuPath are recorded in the order they were used with the parameters under the workflow tab. Extensions are not usually recorded in the workflow tab (unless the extension author added the feature), but can be integrated into the script generated using `Create Workflow`.
+
+Open the LuCa image with the classified cell detections and select the Workflow Tab. 
 <img src='/Tutorials/PNGs/WorkflowTab.png' width='368' height='210'><br>
 
 Parameters are listed when a command is selected.
