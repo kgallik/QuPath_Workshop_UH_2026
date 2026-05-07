@@ -198,3 +198,4 @@ Objects created from pixel classifiers can be used in different ways to layer an
 - Classify detections created with a different classifier (could be an object or pixel classifier)
 - If Annotations are created, detections could be generated within them to answer questions like "how many cells are in the PDL1 regions?"
   - These detections could also be classified to answer a more specific question like "what proportion of cells in the PDL1 regions are positive for X?"
+  
