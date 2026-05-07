@@ -1,49 +1,45 @@
 # Using StarDist in QuPath
 
-[StarDist](https://github.com/stardist), created by Uwe Schmidt and Martin Weigert, is a deep learning convolution neural net that excels at detecting round blob objects, like nuclei. It is also excellent at detecting these types of shapes when they are highly clustered.
+[StarDist](https://github.com/stardist), created by Uwe Schmidt and Martin Weigert, is a deep learning instance segmentation tool that excels at detecting round blob objects, like nuclei. It is also excellent at detecting these types of shapes when they are highly clustered.
 
-Two primary models have been created and released by Schmidt and Weigert, and are available to use with QuPath's StarDist extension: dsb2018_paper(_heavy_augment) for fluorescence data and he_heavy_augment for H&E stained tissues. 
-
-## Setup for using StarDist
-You should have already installed the StarDist extension ([instructions](/Tutorials/Setup_extenstions.md))
-
-You will also need the StarDist models located [here](/Tutorials/StarDist_Models/). I recommend saving them in the QuPath_Extension folder in a new child folder (e.g., QuPath_Extensions/StarDist_models) so it is easier to keep track of them.
-
-After installing the extension and downloading the models, go to Extensions > StarDist. You will see four script options that are pre-written to run on the datatype specified.
-
-<img src='/Tutorials/PNGs/StarDist_Scripts.png' width='347' height='237'><br>
-
-We will test out the fluorescence and H&E models.
+Three StarDist models have been created and released by Schmidt and Weigert, and are available to use with QuPath's StarDist extension: dsb2018_paper(_heavy_augment) for fluorescence data and he_heavy_augment for H&E stained tissues. You can find the models in the P drive. Copy the `StarDist Models` folder to the desktop.
 
 ## Running StarDist
+
 StarDist is run through a script. There are a few parameters available in the script to fine tune the results of the model.
 
 - `channels('name' or index of channel)` The channel that contains blob like objects. If using index value, indexing starts a 0. *Only applies to fluorescence-like images.*
 - `threshold(value between 0-1)` The higher the value the more stringent the results.
 - `pixelSize(any floating point value)` Minimum value is the pixel size of the image. Increasing the number will down sample the image prior to running StarDist, the more down sampling the less accurate the outlines.
-- `normalizePercentiles(lower, upper)` Default is `1,99` which works well for most data. Increase the lower value to cut out background and decrease the upper value if the signals are very dim. 
+- `normalizePercentiles(lower, upper)` Default is `1,99` which works well for most data.
+- (Optional) `cellExpansion(in um)` can be used to create an arbitrary expansion of the specified distance around the detection.
 
 The location of the model also needs to be provided in the variable `modelPath`.
 
 Example of a model path = `'/path/to/location/dsb2018_paper.pb'`
 
-Optional `cellExpansion(number in um)` can be used to create an arbitrary expansion of the specified distance around the detection.
-
-If not already in your project, add the kidney_3chan.czi (fluorescence) and 44770.svs (H&E) images.
+*Tip: Groovy (QuPath's scripting language) and Python (what StarDist runs on) do not like backslashes, common in Windows OS. Use `$/\Windows\style\path\file/$` in Groovy to avoid issues.*
 
 ### Fluorescence model
-Open the kidney_3chan.czi image and create a 2048x2048 rectangle using Objects > Annotations > Specify annotation
 
-<img src='/Tutorials/PNGs/SpecifyAnnotation.png' width='279' height='272'><br>
-<img src='/Tutorials/PNGs/SpecifyAnnotation2.png' width='150' height='161'><br>
+Create a duplicate of the LuCa image that contains the original cell detections created earlier. Delete the points annotations, if present, and the detections (`Delete all detections`) so the original rectangles remain.
 
-Move the rectangle to somewhere you find interesting in the image. Then open `StarDist fluorescence cell detection script` under Extensions > StarDist
+Open `StarDist fluorescence detection script`:
 
-Change `pixelSize` to `0.345` and enter the path to the location of the dsb2018_paper.pb model in the `modelPath` variable.
+![StarDist Script](/Tutorials/PNGs/StarDist_Script.png)
 
-Select the rectangle (should be highlighted) and then press `Run` to run StarDist. It should take approximately 1 min to run on the Short Partition.
+Enter the path to the dsb2018 heavy augment model in the script on line 21 where it asks for the model path. If you transferred the models to the desktop, the path should be something like:
 
-![StarDist Results fluorescence](/Tutorials/PNGs/StarDist_Results.png)
+ `\\ad.helsinki.fi\home\g\**your_username**\Desktop\StarDistModels\dsb2018_heavy_augment.pb`
+
+*Tip: you can get the path to a file by right clicking and selecting "copy as path" in Windows OS.*
+
+Adjust the below parameters to the following:
+
+- Channel: `6` (using the index of the channel is safer than the name)
+- Cell expansion: `4`
+
+Select one of the rectangles (should be highlighted) and then press `Run` to run StarDist. It should take approximately 1 min to run on the Short Partition.
 
 Try changing some of the parameters to see how they influence the results.
 
