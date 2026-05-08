@@ -14,11 +14,11 @@ Welcome to the workshop for QuPath v6.0! You will find tutorials for this worksh
 - [CellPose](/Tutorials/06_CellPose.md)
 - [Segment Anything Model (SAM)](/Tutorials/07_SAM.md)
 
+## Files for course
 
+Images and other files we will use for this course can be accessed on the P drive (visible in `This PC` in File Explorer).
 
-## Images
-
-Images can be accessed on the P drive (add in path) in the class computers or here (add links to images)
+If you cannot see the P drive on the university computer you are using, [use these instructions to add it](/Tutorials/Adding_PDrive.md).
 
 ## QuPath Resources
 

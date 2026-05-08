@@ -10,6 +10,6 @@ In the new window, enter in the following information:
 
 ![Pdrive2](/Tutorials/PNGs/P_Drive2.png)
 
-When you click on `My PC` in File Explorer, you should now see the P Drive:
+When you click on `This PC` in File Explorer, you should now see the P Drive:
 
 ![Pdrive3](/Tutorials/PNGs/P_Drive3.png)
