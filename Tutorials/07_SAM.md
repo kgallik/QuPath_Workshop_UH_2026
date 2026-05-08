@@ -1,8 +1,8 @@
 # Segment Anything Model
 
-Segment Anything Model (SAM) was [originally created](https://arxiv.org/abs/2304.02643) by a group at Meta for segmenting natural images (i.e., pictures of people, city scapes, animals, etc.) and then repurposed by Ko Sugawara to [segment biological images](https://www.biorxiv.org/content/10.1101/2023.06.13.544786v1) and created a QuPath extension for using SAM in the software.
+Segment Anything Model (SAM) was [originally created](https://arxiv.org/abs/2304.02643) by a group at Meta for segmenting natural images (i.e., pictures of people, cityscapes, animals, etc.) and then repurposed by Ko Sugawara to [segment biological images](https://www.biorxiv.org/content/10.1101/2023.06.13.544786v1) and created a QuPath extension for using SAM in the software.
 
-SAM requires a [separate python environment](https://github.com/ksugar/samapi) in addition to the [QuPath extension](https://github.com/ksugar/qupath-extension-sam?tab=readme-ov-file). We installed these earlier in the course. If you have a computer with a GPU, SAM can take advantage of GPU acceleration. Instructions for setting up GPU support are in the SAMAPI GitHub repo. For today, we will use the CPU version.
+SAM requires a [separate python environment](https://github.com/ksugar/samapi) in addition to the [QuPath extension](https://github.com/ksugar/qupath-extension-sam?tab=readme-ov-file). We installed these earlier in the course. If you have a computer with a GPU, SAM can take advantage of GPU acceleration. Instructions for setting up GPU support are in the SAMAPI GitHub repo linked above. For today, we will use the CPU version.
 
 ## Starting the SAMAPI server
 
@@ -18,17 +18,32 @@ When you see these messages in the terminal window, SAM is ready to use:
 
 ## Using SAM in QuPath
 
-In QuPath, open the CMU-1 image. Open the `SAM` extension in QuPath.
+In QuPath, open the CMU-1 image. Open the `SAM` extension in QuPath. You should see this new window open:
 
-Select the Rectangle Annotation button in the window and then click Live Mode. Draw a rectangle that roughly covers the full kidney, SAM will automatically create a segmentation outline that outlines the full kidney.
+![SAM menu](/Tutorials/PNGs/SAMAPI_Menu.png)
 
-<img src='/Tutorials/PNGs/SAM_Outline.png' width='372' height='239'><br>
-<img src='/Tutorials/PNGs/SAM_Outline2.png' width='372' height='239'><br>
+You can select different models, prompt type, output type, and how to run SAM (for selected prompts or live). Keep the model on `vit_l(large)`, change the output type to `Single Mask` and use the Rectangle tool to draw a rectangle around one of the tissues in the CMU-1 image.
 
-SAM segmentation is context dependent. Try zooming in and finding a glomeruli and using the rectangle prompt to segment it.
+![rectangle prompt](/Tutorials/PNGs/SAM_rectangle_prompt.png)
 
-<img src='/Tutorials/PNGs/SAM_Glomeruli.png' width='343' height='353'><br>
+Make sure the rectangle remains highlighted and then click on `Run for selected` in the SAM menu. You should get something similar to this after SAM finishes (with CPU this may take a few minutes):
+
+![SAM result](/Tutorials/PNGs/SAM_result.png)
+
+SAM segmentation is context dependent. I go by the guideline that if I can see the structure I want to have SAM segment, SAM should be able to see it too. Try zooming in and finding a structure in the tissue and using the rectangle prompt to segment it.
+
+![SAM structure prompt](/Tutorials/PNGs/SAM_rectangle_prompt2.png)
+
+![Sam Structure result](/Tutorials/PNGs/SAM_result2.png)
 
 The Points annotation tool can also be used as prompts for SAM.
 
-<img src='/Tutorials/PNGs/SAM_Points.png' width='418' height='357'>
+![SAM points prompt](/Tutorials/PNGs/SAM_points_prompt.png)
+
+![SAM points results](/Tutorials/PNGs/SAM_points_results.png)
+
+![SAM multi points prompt](/Tutorials/PNGs/SAM_points_prompt2.png)
+
+![SAM multi points result](/Tutorials/PNGs/SAM_points_results2.png)
+
+Take a few minutes to test out different models, prompts at different zoom levels, and the out put type on both CMU-1 and LuCa. Try toggling channel visibility to see how it impacts results.
