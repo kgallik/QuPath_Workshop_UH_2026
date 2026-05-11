@@ -2,6 +2,14 @@
 
 Two of the extensions we will use in this workshop require python environments to function: CellPose and SAM. Before starting any analysis tutorials, we will get these environments created so they are ready to use later in the class.
 
+## Installing Git
+
+Git is a versioning software that can also be used to access web hosted software, like on GitHub. This should already be installed on the university computers in the computer class. If you are planning to use your own computer for using the extensions like CellPose or SAM in QuPath, you will need to [install Git](https://git-scm.com/install/) in addition to Miniconda (or Anaconda).
+
+Git can also be found in the Software Center for university computers:
+
+![Git Software Center](/Tutorials/PNGs/Git_softwarecenter.png)
+
 ## Installing Miniconda
 
 Miniconda is a light weight version of Anaconda3 (a python environment manager), which we will use for this class. Technically any python manager will work for creating these environments, we happen to be using this one.
